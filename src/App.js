@@ -66,24 +66,28 @@ const App = () => {
     <div className="calculator">
       <div id="display" className="display">{input}</div>
       <div className="buttons">
-        <button id="clear" onClick={() => handleClick("clear")}>C</button>
-        <button id="divide" onClick={() => handleClick("/")}>/</button>
-        <button id="multiply" onClick={() => handleClick("*")}>*</button>
-        <button id="seven" onClick={() => handleClick("7")}>7</button>
-        <button id="eight" onClick={() => handleClick("8")}>8</button>
-        <button id="nine" onClick={() => handleClick("9")}>9</button>
-        <button id="subtract" onClick={() => handleClick("-")}>-</button>
-        <button id="four" onClick={() => handleClick("4")}>4</button>
-        <button id="five" onClick={() => handleClick("5")}>5</button>
-        <button id="six" onClick={() => handleClick("6")}>6</button>
-        <button id="add" onClick={() => handleClick("+")}>+</button>
-        <button id="one" onClick={() => handleClick("1")}>1</button>
-        <button id="two" onClick={() => handleClick("2")}>2</button>
-        <button id="three" onClick={() => handleClick("3")}>3</button>
-        <button id="zero" onClick={() => handleClick("0")}>0</button>
-        <button id="decimal" onClick={() => handleClick(".")}>.</button>
-        <button id="equals" onClick={() => handleClick("=")}>=</button>
-      </div>
+  <div className="numbers">
+    <button onClick={() => handleClick("7")}>7</button>
+    <button onClick={() => handleClick("8")}>8</button>
+    <button onClick={() => handleClick("9")}>9</button>
+    <button onClick={() => handleClick("4")}>4</button>
+    <button onClick={() => handleClick("5")}>5</button>
+    <button onClick={() => handleClick("6")}>6</button>
+    <button onClick={() => handleClick("1")}>1</button>
+    <button onClick={() => handleClick("2")}>2</button>
+    <button onClick={() => handleClick("3")}>3</button>
+    <button onClick={() => handleClick("0")}>0</button>
+    <button onClick={() => handleClick(".")}>.</button>
+    <button id="clear" onClick={() => handleClick("clear")}>C</button>
+  </div>
+  <div className="operators">
+    <button onClick={() => handleClick("/")}>/</button>
+    <button onClick={() => handleClick("*")}>*</button>
+    <button onClick={() => handleClick("-")}>-</button>
+    <button onClick={() => handleClick("+")}>+</button>
+    <button id="equals" onClick={() => handleClick("=")}>=</button>
+  </div>
+</div>
     </div>
   );
 };
