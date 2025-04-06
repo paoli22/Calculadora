@@ -11,36 +11,35 @@
   --text: #f0f0f0;
 }
 
+
 body {
-  font-family: "Fira Code", monospace;
-  background-color: #0e0e0e;
-  color: #ffffff;
+  font-family: 'Share Tech Mono', monospace;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   margin: 0;
 }
 
 .calculator {
-  background-color: #1a1a1a;
-  border-radius: 16px;
+  width: 300px;
+  background: #111;
   padding: 20px;
-  box-shadow: 0 0 30px rgba(0, 255, 163, 0.3);
-  width: 320px;
-  transition: all 0.3s ease-in-out;
+  border-radius: 20px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+  color: #00ffcc;
 }
 
 .display {
-  background-color: #121212;
-  color: #0ff;
-  font-size: 2.5rem;
+  background: #000;
+  color: #00ffcc;
   text-align: right;
   padding: 20px;
+  font-size: 2.2rem;
   border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: inset 0 0 10px #00ffe1;
-  transition: all 0.2s;
+  margin-bottom: 15px;
+  border: 1px solid #00ffcc;
 }
 
 .buttons {
@@ -48,7 +47,8 @@ body {
   gap: 10px;
 }
 
-.numbers, .operators {
+.numbers,
+.operators {
   display: grid;
   gap: 10px;
 }
@@ -64,29 +64,43 @@ body {
 }
 
 button {
-  background-color: #222;
-  color: #fff;
-  font-size: 1.5rem;
+  background: #222;
+  border: 1px solid #00ffcc;
   padding: 15px;
-  border: none;
-  border-radius: 10px;
+  font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  transition: transform 0.1s ease, background-color 0.2s;
+  color: #00ffcc;
+  border-radius: 12px;
+  transition: background 0.2s, transform 0.1s;
 }
 
 button:hover {
-  background-color: #00ffe1;
+  background: #00ffcc;
   color: #000;
-  transform: scale(1.05);
 }
 
-button:active {
+button:active,
+button.pressed {
+  background: #00ffcc;
+  color: #000;
   transform: scale(0.95);
 }
 
+.clear {
+  background: #ff1744;
+  color: white;
+  grid-column: span 3;
+}
+
+.clear:hover {
+  background: #ff4569;
+}
+
 .equals {
-  background-color: #00ff90;
-  color: #000;
-  font-weight: bold;
+  background: #00e676;
+  color: black;
+}
+
+.equals:hover {
+  background: #00c853;
 }

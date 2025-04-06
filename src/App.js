@@ -62,54 +62,76 @@ const App = () => {
     setInput(input + value);
   };
 
-  // Escuchar teclas del teclado
+  const keyMap = {
+    Enter: "=",
+    Escape: "clear",
+    Backspace: "clear",
+    "+": "+",
+    "-": "-",
+    "*": "*",
+    "/": "/",
+    ".": ".",
+    "=": "=",
+    0: "0",
+    1: "1",
+    2: "2",
+    3: "3",
+    4: "4",
+    5: "5",
+    6: "6",
+    7: "7",
+    8: "8",
+    9: "9",
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      const key = e.key;
-
-      if ("0123456789".includes(key)) {
-        handleClick(key);
-      } else if (key === "+" || key === "-" || key === "*" || key === "/") {
-        handleClick(key);
-      } else if (key === "Enter" || key === "=") {
-        e.preventDefault(); // para que Enter no envíe formularios por accidente
-        handleClick("=");
-      } else if (key === ".") {
-        handleClick(".");
-      } else if (key === "Escape" || key === "c" || key === "C") {
-        handleClick("clear");
+      const value = keyMap[e.key];
+      if (value !== undefined) {
+        handleClick(value);
+        const btn = document.querySelector(`button[data-key="${value}"]`);
+        if (btn) {
+          btn.classList.add("pressed");
+          setTimeout(() => btn.classList.remove("pressed"), 150);
+        }
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [input, newCalculation, prevResult]);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [input, prevResult, newCalculation]);
 
   return (
     <div className="calculator">
       <div id="display" className="display">{input}</div>
       <div className="buttons">
-        <button id="clear" onClick={() => handleClick("clear")}>C</button>
-        <button id="divide" onClick={() => handleClick("/")}>/</button>
-        <button id="multiply" onClick={() => handleClick("*")}>*</button>
-        <button id="seven" onClick={() => handleClick("7")}>7</button>
-        <button id="eight" onClick={() => handleClick("8")}>8</button>
-        <button id="nine" onClick={() => handleClick("9")}>9</button>
-        <button id="subtract" onClick={() => handleClick("-")}>-</button>
-        <button id="four" onClick={() => handleClick("4")}>4</button>
-        <button id="five" onClick={() => handleClick("5")}>5</button>
-        <button id="six" onClick={() => handleClick("6")}>6</button>
-        <button id="add" onClick={() => handleClick("+")}>+</button>
-        <button id="one" onClick={() => handleClick("1")}>1</button>
-        <button id="two" onClick={() => handleClick("2")}>2</button>
-        <button id="three" onClick={() => handleClick("3")}>3</button>
-        <button id="zero" onClick={() => handleClick("0")}>0</button>
-        <button id="decimal" onClick={() => handleClick(".")}>.</button>
-        <button id="equals" onClick={() => handleClick("=")}>=</button>
+        <div className="numbers">
+          {["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", "."].map((num) => (
+            <button
+              key={num}
+              data-key={num}
+              onClick={() => handleClick(num)}
+            >
+              {num}
+            </button>
+          ))}
+          <button data-key="clear" onClick={() => handleClick("clear")} className="clear">C</button>
+        </div>
+        <div className="operators">
+          {["/", "*", "-", "+", "="].map((op) => (
+            <button
+              key={op}
+              data-key={op === "=" ? "Enter" : op}
+              onClick={() => handleClick(op)}
+              className={op === "=" ? "equals" : ""}
+            >
+              {op}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
 export default App;
-
