@@ -6,23 +6,6 @@ const App = () => {
   const [prevResult, setPrevResult] = useState(null);
   const [newCalculation, setNewCalculation] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      const { key } = event;
-
-      if (key === "Enter") {
-        handleClick("=");
-      } else if (key === "Escape") {
-        handleClick("clear");
-      } else if (/^[0-9+\-*/.=]$/.test(key)) {
-        handleClick(key === "=" ? "=" : key);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [input, newCalculation, prevResult]);
-
   const handleClick = (value) => {
     if (value === "clear") {
       setInput("0");
@@ -79,31 +62,50 @@ const App = () => {
     setInput(input + value);
   };
 
+  // Escuchar teclas del teclado
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const key = e.key;
+
+      if ("0123456789".includes(key)) {
+        handleClick(key);
+      } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+        handleClick(key);
+      } else if (key === "Enter" || key === "=") {
+        e.preventDefault(); // para que Enter no envíe formularios por accidente
+        handleClick("=");
+      } else if (key === ".") {
+        handleClick(".");
+      } else if (key === "Escape" || key === "c" || key === "C") {
+        handleClick("clear");
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [input, newCalculation, prevResult]);
+
   return (
     <div className="calculator">
       <div id="display" className="display">{input}</div>
       <div className="buttons">
-        <div className="numbers">
-          <button onClick={() => handleClick("7")}>7</button>
-          <button onClick={() => handleClick("8")}>8</button>
-          <button onClick={() => handleClick("9")}>9</button>
-          <button onClick={() => handleClick("4")}>4</button>
-          <button onClick={() => handleClick("5")}>5</button>
-          <button onClick={() => handleClick("6")}>6</button>
-          <button onClick={() => handleClick("1")}>1</button>
-          <button onClick={() => handleClick("2")}>2</button>
-          <button onClick={() => handleClick("3")}>3</button>
-          <button onClick={() => handleClick("0")}>0</button>
-          <button onClick={() => handleClick(".")}>.</button>
-          <button onClick={() => handleClick("clear")}>C</button>
-        </div>
-        <div className="operators">
-          <button onClick={() => handleClick("/")}>/</button>
-          <button onClick={() => handleClick("*")}>*</button>
-          <button onClick={() => handleClick("-")}>-</button>
-          <button onClick={() => handleClick("+")}>+</button>
-          <button className="equals" onClick={() => handleClick("=")}>=</button>
-        </div>
+        <button id="clear" onClick={() => handleClick("clear")}>C</button>
+        <button id="divide" onClick={() => handleClick("/")}>/</button>
+        <button id="multiply" onClick={() => handleClick("*")}>*</button>
+        <button id="seven" onClick={() => handleClick("7")}>7</button>
+        <button id="eight" onClick={() => handleClick("8")}>8</button>
+        <button id="nine" onClick={() => handleClick("9")}>9</button>
+        <button id="subtract" onClick={() => handleClick("-")}>-</button>
+        <button id="four" onClick={() => handleClick("4")}>4</button>
+        <button id="five" onClick={() => handleClick("5")}>5</button>
+        <button id="six" onClick={() => handleClick("6")}>6</button>
+        <button id="add" onClick={() => handleClick("+")}>+</button>
+        <button id="one" onClick={() => handleClick("1")}>1</button>
+        <button id="two" onClick={() => handleClick("2")}>2</button>
+        <button id="three" onClick={() => handleClick("3")}>3</button>
+        <button id="zero" onClick={() => handleClick("0")}>0</button>
+        <button id="decimal" onClick={() => handleClick(".")}>.</button>
+        <button id="equals" onClick={() => handleClick("=")}>=</button>
       </div>
     </div>
   );
