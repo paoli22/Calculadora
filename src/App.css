@@ -32,16 +32,28 @@ body {
 }
 
 .display {
-  background-color: #121212;
-  color: #0ff;
-  font-size: 2.5rem;
+  background: #000;
+  color: #00ffcc;
   text-align: right;
   padding: 20px;
+  font-size: 2.2rem;
   border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: inset 0 0 10px #00ffe1;
-  transition: all 0.2s;
+  margin-bottom: 15px;
+  border: 1px solid #00ffcc;
+  word-wrap: break-word;
+  overflow-x: auto;
+  max-height: 100px;
+  line-height: 1.2;
 }
+.display::-webkit-scrollbar {
+  height: 6px;
+}
+
+.display::-webkit-scrollbar-thumb {
+  background: #00ffcc;
+  border-radius: 10px;
+}
+
 
 .buttons {
   display: flex;
